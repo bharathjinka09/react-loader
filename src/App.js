@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
 
 function App() {
+  const [isLoading, setLoading] = useState(false);
+
+  const fetchData = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false)
+    },3500)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="App-header"><br />
+        {
+          isLoading ? 
+          <div>
+            <h4>Fetching data...</h4>
+            <img alt='' style={{width:'200px',height:'200px'}} src='img/loader.gif' />
+          </div> :
+          <button className='button' onClick={fetchData}>
+            Click to fetch data
+          </button>
+        }
       </header>
+        
     </div>
   );
 }
